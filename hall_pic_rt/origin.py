@@ -127,7 +127,7 @@ def excess_metrics(eps, weights, cfg):
     return out
 
 
-def attribution(electrons, mask=None):
+def attribution(electrons, cfg, mask=None):
     """Rozkłada energię wybranej grupy elektronów na mechanizmy, które ją dostarczyły.
 
     Dla każdej składowej pola podaje łączną pracę wykonaną nad tą grupą oraz jej
@@ -178,7 +178,7 @@ def attribution(electrons, mask=None):
     return out
 
 
-def dominant_channel(electrons, mask=None):
+def dominant_channel(electrons, cfg, mask=None):
     """Wskazuje dla każdego elektronu, która składowa pola dała mu najwięcej energii.
 
     Zwraca udział wagi elektronów przypisanych do każdego mechanizmu. Elektron
