@@ -1,12 +1,5 @@
 """Sprawdziany poprawności wersji liczącej w poprzek i wokół komory.
 
-Każdy sprawdzian porównuje wynik programu z czymś, co wiadomo skądinąd: z
-rozwiązaniem podanym wzorem, z prawem zachowania albo z wynikiem teoretycznym.
-Bez tego wnioski o pochodzeniu szybkich elektronów byłyby oparte na niesprawdzonym
-narzędziu, a akurat tutaj łatwo o wynik pozornie sensowny i całkiem fałszywy: źle
-dobrany krok w czasie sam z siebie podgrzewa plazmę i tworzy ogon rozkładu, którego
-w rzeczywistości nie ma.
-
 Uruchomienie:
     python tests_rt.py
 """
