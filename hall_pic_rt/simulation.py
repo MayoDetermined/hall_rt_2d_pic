@@ -215,8 +215,15 @@ class SimulationRT:
         # elektrony wtórne.
         # Ubytek liczymy osobno dla obu gatunków, bo ucieczka wzdłuż osi dotyka
         # ich zupełnie inaczej.
-        loss_e = res_e["w_lo"] + res_e["w_hi"] - res_e["w_see"] + ax_e["w"]
-        loss_i = res_i["w_lo"] + res_i["w_hi"] + ax_i["w"]
+        # Ścianka odbijająca zgłasza wagę czastek, które w nią trafiły, ale nic
+        # nie pochłania, więc taka waga nie jest ubytkiem. Bez tego sterowany
+        # dosył odtwarzałby czastki, które wcale nie zginęły, i gęstość rosłaby
+        # bez końca.
+        absorbing = cfg.wall_mode != "specular"
+        wall_e = res_e["w_lo"] + res_e["w_hi"] - res_e["w_see"] if absorbing else 0.0
+        wall_i = res_i["w_lo"] + res_i["w_hi"] if absorbing else 0.0
+        loss_e = wall_e + ax_e["w"]
+        loss_i = wall_i + ax_i["w"]
         n_i_before = self.ions.N
         w_src, E_src_e, E_src_i = self.source.inject(
             self.electrons, self.ions, self.t, lost_w_e=loss_e, lost_w_i=loss_i)
