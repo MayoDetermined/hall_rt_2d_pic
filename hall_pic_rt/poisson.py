@@ -51,9 +51,9 @@ class PoissonRT:
 
         # Fale wokół komory. Kierunek jest okresowy, a rozkład ładunku
         # rzeczywisty, więc wystarczy połowa fal a  reszta jest ich odbiciem.
-        k = np.arange(self.N_th // 2 + 1)
+        k = np.arange(self.N_th // 2 + 1) # k jest indeksem modu
        
-        self.lam = (2.0 * np.cos(2.0 * np.pi * k / self.N_th) - 2.0) / self.h_th**2
+        self.lam = (2.0 * np.cos(2.0 * np.pi * k / self.N_th) - 2.0) / self.h_th**2 # wartość własna operatora 
         self.n_modes = self.lam.size
 
         if self.floating:
@@ -159,7 +159,7 @@ class PoissonRT:
             if sigma_hi is not None:
                 src[-1] = src[-1] - f * sigma_hi
             
-            rhs = np.fft.rfft(src, axis=1)
+            rhs = np.fft.rfft(src, axis=1) # korzystam z modułu z numpy 
             phi = np.fft.irfft(self._solve_tridiag(rhs), n=self.N_th, axis=1)
         else:
             src = -rho[1:self.N_r] / EPS0
